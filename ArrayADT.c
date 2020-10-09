@@ -154,8 +154,6 @@ void deleteArray() //this function will delete the element from the array
    printf("Enter the number you want to Delete from the array\n"); //Entering the number that is to be deleted 
    scanf("%d",&num);
 
-   //Applying linear search operation in the array in order to find the element and delete it from the array
-   //Linear search is applied here becoz it works on sorted or unsorted array
    printf("Searching for %d in the array....\n", num);
    for(i=0;i<arr.length;i++)
    {
@@ -170,6 +168,8 @@ void deleteArray() //this function will delete the element from the array
    {
    	printf("Element %d is in position %d inside the array\n", num,i);
    	printf("Deleting element %d from position %d in the array........\n",num,i);
+   	//Applying linear search operation in the array in order to find the element and delete it from the array
+   //Linear search is applied here becoz it works on sorted or unsorted array
    	for(j=i;j<arr.length-1;j++)
    	{
    		arr.A[j]=arr.A[j+1]; //it will shift the elements from the last to the desired position by one index
