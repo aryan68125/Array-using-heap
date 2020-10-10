@@ -6,6 +6,7 @@ void AppendArray();
 void insertArray();
 void deleteArray();
 void LinearSearchArray();
+void BinarySearchArray();
 
 //in order to create an Array inside the heap we need to first create a Structure 
 struct Array // structure name
@@ -13,6 +14,14 @@ struct Array // structure name
 	int *A; // Array pointer. it is integer type it can point on an Array
 	int size; //size of an array that we will enter during run time
 	int length; // to store the length of an array i.e: Number of elements that the user wants to enter inside the array
+};
+
+//this array is temporary array created in heap so that we can perform binary search withou have to worry about whether its sorted or not
+struct Temp
+{
+	int *B; //Array pointer pointing to array b which is a temporary array
+	int sizeB; //size of array B
+	int lengthB; //length of array B
 };
 
 //declaring the arr globally will allow us to access it in any function in this program
@@ -210,11 +219,87 @@ void LinearSearchArray()
    if(tr==1)
    {
    	printf("The element %d is stored in position %d inside of the array\n",num,i);
+   	printf("Linear search Successfull !!!!!......\n");
    }
    else
    {
    	printf("The element %d is not present inside the array\n", num);
+   	printf("Linear search FAILED!!!!!!!!.......\n");
    }
+}
+
+void BinarySearchArray()
+{
+	int num; //number that you want to search inside the array
+
+    printf("Enter the number that you want to search inside the array\n");
+    scanf("%d",&num);
+
+	//now setting up the array b which is a temporary array that will be used to perform binary search
+	struct Temp temp; //this array will be identical in size and length to  the original array
+	                   //the temp should be a pointer *temp becoz we are required to modify the array b
+	temp.B=(int*)malloc(arr.size*sizeof(int)); //creating temporary array inside the heap
+	// now while accessing the members we should use -> method becoz now we are using *temp instead of temp
+	temp.lengthB=arr.length;
+
+	for(int i=0;i<arr.length;i++)
+	{
+		temp.B[i]=arr.A[i]; //copying the elements from a array to b array
+	}
+	int tempo;
+	for(int i=1;i<temp.lengthB;i++)  //Bubble sorting the temporary array in ascending order
+	{
+		for(int j=0;j<temp.lengthB-1;j++)
+		{
+			if(temp.B[j]>temp.B[i]) //this logic will sort the array in ascending order
+			{// swapping logic 
+				tempo=temp.B[j];
+				temp.B[j]=temp.B[i];
+				temp.B[i]=tempo;
+			}
+		}
+	}
+
+    //printing the sorted array 
+    printf("Sorting the array before performing binary search.......\n");
+    for(int i=0;i<temp.lengthB;i++)
+    {
+    	printf("%d\n",temp.B[i]);
+    }
+    
+	//now we can apply binary search on the temporary array 
+	int low=0; //lower bound
+	int high=temp.lengthB; //higher bound
+	int mid;
+	int key; //key will store mid if the num is found inside the array
+	while (low<=high) // condition for the loop
+	{
+        mid = (low+high)/2;
+        if(num == temp.B[mid])
+        {
+        	key=temp.B[mid];
+        	break;
+        }
+        else if(num<temp.B[mid])
+        {
+        	high=mid-1;
+        }
+        else
+        {
+        	low=mid+1;
+        }
+	}
+
+	if(key==num)
+	{
+        printf("The element %d is found in array\n",num);
+        printf("Binary search Successfull!!!!.....\n");
+    }
+    else 
+    {
+    	printf("The element %d is not present in the array\n",num);
+    	printf("Binary Search FAILED!!!!!.....\n");
+    }
 }
 
 int main()
@@ -230,7 +315,8 @@ int main()
     printf("Press 4 to Insert the element at the desired position inside the Array\n");
     printf("Press 5 to Delete the element from the array\n");
     printf("Press 6 to Find the element using Linear Searching method in the array\n");
-    printf("Press 7 to Exit the program\n");
+    printf("Press 7 to Find the element using Binary Searching method in the array\n");
+    printf("Press 8 to Exit the program\n");
     scanf("%d",&key);
     printf("\n");
     switch(key)
@@ -260,6 +346,9 @@ int main()
     	printf("\n");
     	break;
     	case 7:
+    	BinarySearchArray(); //Binary search in array
+    	break;
+    	case 8:
     	printf("------------------------Developer info----------------------\n");
     	printf("Name:- Aditya Kumar\n");
     	printf("Course:-B.Tech CS\n");
