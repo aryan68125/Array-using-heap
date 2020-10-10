@@ -208,23 +208,23 @@ int main()
     switch(key)
     {
     	case 1:
-    	createArray(); //create
+    	createArray(); //create array
     	printf("\n");
     	break;
     	case 2:
-    	displayArray(); //display
+    	displayArray(); //display elements in array
     	printf("\n");
     	break;
     	case 3:
-    	AppendArray(); //Append
+    	AppendArray(); //Append elements in array
     	printf("\n");
     	break;
     	case 4:
-    	insertArray(); //Insert
+    	insertArray(); //Insert elements in array
     	printf("\n");
     	break;
     	case 5:
-    	deleteArray();
+    	deleteArray(); //delete elements in array
     	printf("\n");
     	break;
     	case 6:
