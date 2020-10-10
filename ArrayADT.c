@@ -5,6 +5,7 @@ void displayArray();
 void AppendArray();
 void insertArray();
 void deleteArray();
+void LinearSearchArray();
 
 //in order to create an Array inside the heap we need to first create a Structure 
 struct Array // structure name
@@ -190,6 +191,32 @@ void deleteArray() //this function will delete the element from the array
    }
 }
 
+void LinearSearchArray()
+{
+	int num; //number that you want to search
+	int i; //Linear search loop variable
+	int tr=0; //boolean variable
+	printf("Enter the number that you want to search inside the array\n");
+	scanf("%d",&num);
+	printf("Searching for %d in the array....\n", num);
+   for(i=0;i<arr.length;i++)
+   {
+   	if(num==arr.A[i])
+   	{  
+   		tr=1; //boolean variable
+   		break;
+   	}
+   }
+   if(tr==1)
+   {
+   	printf("The element %d is stored in position %d inside of the array\n",num,i);
+   }
+   else
+   {
+   	printf("The element %d is not present inside the array\n", num);
+   }
+}
+
 int main()
 {
 	int key; //choice for menue switch case
@@ -202,7 +229,8 @@ int main()
     printf("Press 3 to Append the number inside the array\n");
     printf("Press 4 to Insert the element at the desired position inside the Array\n");
     printf("Press 5 to Delete the element from the array\n");
-    printf("Press 6 to Exit the program\n");
+    printf("Press 6 to Find the element using Linear Searching method in the array\n");
+    printf("Press 7 to Exit the program\n");
     scanf("%d",&key);
     printf("\n");
     switch(key)
@@ -228,6 +256,10 @@ int main()
     	printf("\n");
     	break;
     	case 6:
+    	LinearSearchArray(); //Linear search in array
+    	printf("\n");
+    	break;
+    	case 7:
     	printf("------------------------Developer info----------------------\n");
     	printf("Name:- Aditya Kumar\n");
     	printf("Course:-B.Tech CS\n");
